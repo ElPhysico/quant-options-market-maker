@@ -1,6 +1,5 @@
 import pytest
-from src.pricing.black_scholes import black_scholes_price, black_scholes_greeks
-
+from quant_options_mm.pricing.black_scholes import black_scholes_price, black_scholes_greeks
 
 def test_black_scholes_call():
     price = black_scholes_price(S=100,
