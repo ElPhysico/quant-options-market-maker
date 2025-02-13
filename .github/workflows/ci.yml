@@ -1,0 +1,28 @@
+name: CI - Unit Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Micromamba
+        uses: mamba-org/setup-micromamba@v1
+        with:
+          micromamba-version: latest
+          environment-name: quant-mm
+          create-args: python=3.10 numpy scipy pandas matplotlib pytest
+          cache-environment: true
+
+      - name: Install dependencies
+        run: |
+          micromamba run -n quant-mm pip install -r requirements.txt
+
+      - name: Run unit tests
+        run: micromamba run -n quant-mm pytest tests/
