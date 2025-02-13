@@ -26,8 +26,11 @@ def implied_volatility(price_market, S, K, T, r, option_type='call', tol=1e-6):
         p = black_scholes_price(S, K, T, r, sigma, option_type)
         return p - price_market
 
+    lower_bound = 1e-8 # very close to 0 but still positive
+    upper_bound = 1000 # very large to allow for extreme cases
+
     try:
-        iv = brentq(objective_function, 1e-6, 5.0, xtol=tol)
+        iv = brentq(objective_function, lower_bound, upper_bound, xtol=tol)
     except ValueError:
         iv = np.nan
 
