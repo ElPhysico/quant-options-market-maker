@@ -17,8 +17,12 @@ jobs:
         with:
           micromamba-version: latest
           environment-name: quant-mm
-          environment-file: environment.yml  # Use environment.yml directly
+          environment-file: environment.yml
           cache-environment: true
+
+      - name: Install the package
+        run: |
+          micromamba run -n quant-mm pip install -e . --use-pep517
 
       - name: Run unit tests
         run: micromamba run -n quant-mm pytest tests/
