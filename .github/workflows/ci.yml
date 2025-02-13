@@ -17,12 +17,8 @@ jobs:
         with:
           micromamba-version: latest
           environment-name: quant-mm
-          create-args: python=3.10 numpy scipy pandas matplotlib pytest
+          environment-file: environment.yml  # Use environment.yml directly
           cache-environment: true
-
-      - name: Install dependencies
-        run: |
-          micromamba run -n quant-mm pip install -r requirements.txt
 
       - name: Run unit tests
         run: micromamba run -n quant-mm pytest tests/
