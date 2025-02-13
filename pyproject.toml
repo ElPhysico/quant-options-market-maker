@@ -1,0 +1,11 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quant-options-market-maker"
+version = "0.1"
+dependencies = []
+
+[tool.setuptools]
+packages = { find = { where = ["src"] } }
