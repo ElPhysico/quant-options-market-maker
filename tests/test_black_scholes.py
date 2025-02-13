@@ -1,5 +1,5 @@
 import pytest
-from src.pricing.black_scholes import black_scholes_price
+from src.pricing.black_scholes import black_scholes_price, black_scholes_greeks
 
 
 def test_black_scholes_call():
@@ -54,3 +54,18 @@ def test_black_scholes_negative_expiry():
                             r=0.05,
                             sigma=0.2,
                             option_type='call')
+        
+
+def test_black_scholes_greeks():
+    greeks = black_scholes_greeks(S=100,
+                                  K=100,
+                                  T=1,
+                                  r=0.05,
+                                  sigma=0.2,
+                                  option_type='call')
+    
+    assert round(greeks['Delta'], 2) == 0.64
+    assert round(greeks['Gamma'], 4) == 0.0188
+    assert round(greeks['Vega'], 2) == 0.38
+    assert round(greeks['Theta'], 2) == -0.02
+    assert round(greeks['Rho'], 2) == 0.53
